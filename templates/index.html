@@ -23,14 +23,19 @@
         <!-- NAVIGATION BAR -->
         <ul>
             <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('login_page') }}">Login</a></li>
-            <li><a href="{{ url_for('signup_page') }}">Sign Up</a></li>
+            <li><a href="{{ url_for('login_user') }}">Login</a></li>
+            <li><a href="{{ url_for('create_user') }}">Sign Up</a></li>
         </ul>
     </div>
     <coingecko-coin-price-marquee-widget  coin-ids="bitcoin,ethereum,eos,ripple,litecoin" currency="usd" background-color="#ffffff" locale="en"></coingecko-coin-price-marquee-widget>
     <div class="mainContainer">
     <br>
     <h1>The Premium Crypto-Asset Tracker</h1>
+    </div>
+    <div class="table">
+        {% block body %}
+        {{ data|safe }}
+        {% endblock %}  
     </div>
 </body>
 </html>

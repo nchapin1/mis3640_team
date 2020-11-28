@@ -1,60 +1,70 @@
+# TODO:
+# 1. can regular app route pages be added into the functional app route pages? HTML header links refer to "url_for"
 from flask import Flask, render_template, request, url_for, flash, redirect
+from flask_sqlalchemy import SQLAlchemy
+from database import db, Users, app
+db.create_all()
 
-app = Flask(__name__)
+# ERROR PAGE
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("page_not_found.html"), 404
 
 
+# INDEX PAGE
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-@app.errorhandler(404)
-def page_not_found(error):
-    return render_template("page_not_found.html"), 404
-
-@app.route("/login/", methods=["GET", "POST"])
-def login_page():
-    # CHECK THE CSV FILE FOR KEYS
-    # return redirect(url_for('login_page'))
-    return render_template("login.html")
-
-@app.route("/signup/", methods=["GET", "POST"])
-def signup_page():
-    # ADD TO THE CSV
-    if request.method == "POST":
-        username = request.form['uname']
-        email = request.form['email']
-        phone = request.form['pnumber']
-        password = request.form['password']
-    return redirect(url_for('create_user', username = username, email = email, phone = phone, password = password))
-
-
-@app.route('/home/')
+# HOME PAGE
+@app.route("/home/")
 def home():
-    return render_template('home.html')
+    return render_template("home.html")
 
 
+# LOGIN PAGE
+@app.route("/login/", methods=['GET','POST'])
+def login_user():
+    if request.method=="POST":
+        input_username = request.form['uname'],
+        input_password = request.form['password']
+    #     query_username = Users.query.filter_by(username=input_username).first()
+    #     query_password = Users.query.filter_by(password=input_password).first()
 
-# @app.route("/nearest/", methods=["GET", "POST"])
-# def search():
-#     if request.method == "POST":
-#         location = request.form["location"]
-#         rad = request.form["rad"]
-#     return redirect(url_for("result", location=location, rad=rad))
+    #     if input_username == query_username and input_password == query_password:
+    #         return redirect(url_for('home'))
+    # return render_template("login.html")
+
+    #     Session = sessionmaker(bind=engine)
+    #     s = Session()
+    #     query = s.query(Users).filter(Users.username==input_username, Users.password==input_password)
+    #     result = query.first()
+    #     if result:
+    #         return redirect(url_for('home'))
+    #     else:
+    #         flash('wrong password')
+    # return render_template("login.html")
+    
 
 
-# @app.route("/nearest_mbta/<location>/<rad>")
-# def result(location, rad):
-#     map_url = userlocation(location)
-#     response_data = fetchmap(map_url)
-#     # if len(response_data['data']) == 1:
-#     #     # flash(u'There are no MBTA stops within {rad} miles of your location.', 'error')
-#     #     return redirect(url_for('/'))
-#     latlng = fetchlatlng(response_data)
-#     stop_name, stop_accessible = fetchmbta(latlng, rad)
-#     return render_template(
-#         "mbta_station.html", stop_name=stop_name, stop_accessible=stop_accessible
-#     )
+# SIGN UP CREATE USER
+@app.route("/signup/", methods=["GET", "POST"])
+def create_user():
+    if request.method == "POST":
+        user = Users(
+        username=request.form["uname"],
+        email=request.form["email"],
+        phone=request.form["pnumber"],
+        password=request.form["password"])
+    
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('signup.html')
 
+    # WORKS return render_template('home.html', user=user)
 
-
+if __name__ == '__main__':
+    db.create_all()
+    app.run(debug=True)
