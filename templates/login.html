@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/stylesheet.css') }}" />
+    <link rel="airplane" href="{{ url_for('static', filename='/files/airplane.jpg') }}" />
+    <link rel="trashcan" href="{{ url_for('static', filename='/files/trashcan.png') }}" />
+
+    <style>
+    </style>
+    <script>
+        function processLogin() {
+            if (document.getElementById("uname").value == "") {
+                alert("Username is required");
+                document.getElementById("uname").focus();
+                document.getElementById("uname").style.backgroundColor = "#FFFF00";
+            }
+            else if (document.getElementById("email").value == "") {
+                alert("Email is required");
+                document.getElementById("email").focus();
+                document.getElementById("email").style.backgroundColor = "#FFFF00";
+            }
+            else {
+                return true;
+            }
+            return false;
+        };
+    </script>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <div class="headerContainer">
+        <a href="{{ url_for('index') }}">
+            <img src="/static/files/logo.png" height=80 alt="Logo"/>
+        </a>
+        <!-- NAVIGATION BAR -->
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('login_user') }}">Login</a></li>
+            <li><a href="{{ url_for('create_user') }}">Sign Up</a></li>
+        </ul>
+    </div>
+
+    <div class="mainContainer">
+        <form method="POST" name="login" action="/login/" onsubmit="return processLogin()">
+            <div class="formContainer">
+                <fieldset>
+                    <legend style="font-size:25px; color:cornflowerblue;">Login Information</legend>
+                    <table>
+                        <tr>
+                            <td>Username:</td>
+                            <td><input type="text" size="30" name="uname" id="uname" /></td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td><input type="text" size="30" name="password" id="password" /></td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <p>
+                    <button type="submit" value="Submit" name="Submit" style="border-color:green;">Submit
+                        <img src="/static/files/airplane.jpg" height="40" alt="Submit Button" />
+                    </button>
+
+                    <button id="resetIcon" type="reset" name="reset" value="Reset" style="border-color:gray;">Reset
+                        <img src="/static/files/trashcan.png" height="40" alt="Reset Button" onclick="resetPage">
+                    </button>
+                </p>
+        </form>
+    </div>
+
+</body>
+</html>

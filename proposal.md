@@ -30,6 +30,7 @@ My individual learning goal is to gain experience with apply Python and Javascri
 
 #### Jasmine:
 I major in Computational and Mathematical Finance. However, I feel only financial analysis and mathematical finance is not enough to thrive in today’s market. There are multiple website allows users to track stock prices from the mass. However, I have not found any useful tool for me to track my crypto portfolio yet. Trading with technology to make prompt decision and orders is the key in crypto market as well. I aim to create a small software to integrate what I learned in Python class to facilitate my trading journey.
+
 #### Cameron:
 My individual learning goal during the course of this project is to gain a deeper knowledge and mastery of Python. In doing this, I hope to achieve a real viable piece of software that I am confident enough to put on my resume. I hope to pursue a career in venture capital thus I have sought out to strengthen my technical knowledge as VC and the tech world go hand-in-hand.
 
@@ -77,8 +78,8 @@ My individual learning goal during the course of this project is to gain a deepe
 1. Update the project website.
 2. Update the Notification javascript code to include any developments past MVP.
 3. Write code for items 2-6 in Week 5. 
-### Week 8:
-1. Prepare for Final Demo. 
+### Week 8: 
+1. Prepare for Final Demo. (11/19)
 2. Patch any remaining issues.
 
 ## Collaboration Plan
