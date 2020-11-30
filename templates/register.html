@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/stylesheet.css') }}" />
+<link rel="airplane" href="{{ url_for('static', filename='/files/airplane.jpg') }}" />
+<link rel="trashcan" href="{{ url_for('static', filename='/files/trashcan.png') }}" />
+
+<body>
+    <!-- HEADER -->
+    <div class="headerContainer">
+        <a href="{{ url_for('homepage') }}">
+            <img src="/static/files/logo.png" height=80 alt="Logo" />
+        </a>
+    </div>
+
+    <div class="mainContainer">
+        <div class="formContainer">
+            <form method="POST" name="register_request" action="/registration_user_request/" onsubmit="return processForm()">
+                <fieldset>
+                    <legend style="font-size:25px; color:cornflowerblue;">User Information</legend>
+                    <table>
+                        <tr>
+                            <td>Username:</td>
+                            <td><input type="text" size="30" name="uname" id="uname" /></td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td><input type="text" size="50" name="email" id="email" /></td>
+                        </tr>
+                        <tr>
+                            <td>Phone Number:</td>
+                            <td><input type="int" size="30" name="pnumber" id="pnumber" /></td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td><input type="text" size="30" name="password" id="password" /></td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <p>
+                    <button type="submit" value="Submit" name="Submit" style="border-color:green;">Submit
+                        <img src="/static/files/airplane.jpg" height="40" alt="Submit Button" />
+                    </button>
+
+                    <button id="resetIcon" type="reset" name="reset" value="Reset" style="border-color:gray;">Reset
+                        <img src="/static/files/trashcan.png" height="40" alt="Reset Button" onclick="resetPage">
+                    </button>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+
+</html>

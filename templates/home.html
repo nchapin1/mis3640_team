@@ -6,34 +6,107 @@
     <title>Crypto Homepage</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/stylesheet.css') }}" />
-    <link rel="logo" href="{{ url_for('static', filename='/files/logo.png') }}" />    
+    <link rel="logo" href="{{ url_for('static', filename='/files/logo.png') }}" />
 </head>
 
-    <style>
-    </style>
-    <script>
-    </script>
-    <script src="https://widgets.coingecko.com/coingecko-coin-price-marquee-widget.js"></script>
+<style>
+    table,
+    th {
+        border: 1px solid black;
+    }
+</style>
+<script>
+    function addCrypto() {
+        if (document.getElementById("symbol").value == "") {
+            alert("Symbol is required");
+            document.getElementById("uname").focus();
+            document.getElementById("uname").style.backgroundColor = "#FFFF00";
+        }
+        else if (document.getElementById("purchase").value == "") {
+            alert("Purchase price is required");
+            document.getElementById("purchase").focus();
+            document.getElementById("purchase").style.backgroundColor = "#FFFF00";
+        }
+        else if (document.getElementById("target").value == "") {
+            alert("Target return is required");
+            document.getElementById("target").focus();
+            document.getElementById("target").style.backgroundColor = "#FFFF00";
+        }
+        else if (document.getElementById("tolerance").value == "") {
+            alert("Loss tolerance is required");
+            document.getElementById("tolerance").focus();
+            document.getElementById("tolerance").style.backgroundColor = "#FFFF00";
+        }
+        else {
+            return true;
+        }
+        return false;
+    };
+</script>
+<script src="https://widgets.coingecko.com/coingecko-coin-price-marquee-widget.js"></script>
 </head>
 
 <body>
     <!-- HEADER -->
     <div class="headerContainer">
         <a href="{{ url_for('index') }}">
-            <img src="/static/files/logo.png" height=80 alt="Logo"/>
+            <img src="/static/files/logo.png" height=80 alt="Logo" />
         </a>
         <!-- NAVIGATION BAR -->
         <ul>
-            <li><a href="{{ url_for('login_user') }}">Login</a></li>
-            <li><a href="{{ url_for('create_user') }}">Sign Up</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('register') }}">Sign Up</a></li>
         </ul>
     </div>
-    <coingecko-coin-price-marquee-widget  coin-ids="bitcoin,ethereum,eos,ripple,litecoin" currency="usd" background-color="#ffffff" locale="en"></coingecko-coin-price-marquee-widget>
+    <coingecko-coin-price-marquee-widget coin-ids="bitcoin,ethereum,eos,ripple,litecoin" currency="usd"
+        background-color="#ffffff" locale="en"></coingecko-coin-price-marquee-widget>
     <p>Plot for portfolio</p>
-    <!-- <p>{{input_username}}</p>
-    <p>{{input_password}}</p>
-    <p>{{query_username}}</p>
-    <p>{{query_password}}</p> -->
+    <p>existing username: {{current_user}}</p>
+    <div class="center">
+        <p>Investments</p>
+        <table>
+            <tr>
+                <th>Symbol</th>
+                <th>Purchase Price</th>
+                <th>Target Return</th>
+                <th>Loss Tolerance</th>
+                <th>Control</th>
+            </tr>
+            {% for row in rows %}
+            <tr>
+                <td>{{row.symbol}}</td>
+                <td>{{row.purchase}}</td>
+                <td>{{row.current}}</td>
+                <td>{{row.target}}</td>
+                <td>{{row.tolerance}}</td>
+            </tr>
+            {% endfor %}
+            <form method="POST" name='addCrypto' role="form" action="{{url_for('add_crypto', username=variable)}}"
+                onsubmit="return addCrypto()">
+
+                <tr>
+                    <td><input type="text" name="symbol" id="symbol" /></td>
+                    <td><input type="number" name="purchase" id="purchase" /></td>
+                    <td><input type="number" name="target" id="target" /></td>
+                    <td><input type="number" name="tolerance" id="tolerance" /></td>
+                    <td><button type="submit" value="submit" name="submit">Add</button></td>
+                </tr>
+                {% for message in get_flashed_messages() %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </form>
+            <tr>
+                <td>{{symbol}}</td>
+                <td>{{purchase}}</td>
+                <td>{{current}}</td>
+                <td>{{target}}</td>
+                <td>{{tolerance}}</td>
+                <td>{{username_id}}</td>
+            </tr>
+        </table>
+    </div>
+
 
 </body>
+
 </html>

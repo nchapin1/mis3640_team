@@ -1,8 +1,6 @@
 <!-- Project Homepage -->
 <!DOCTYPE html>
 <html lang="en">
-<!-- {% extends "layout.jinja2" %}
-{% block content %} -->
 
 <head>
     <title>Crypto Homepage</title>
@@ -24,8 +22,8 @@
         </a>
         <!-- NAVIGATION BAR -->
         <ul>
-            <li><a href="{{ url_for('login_user') }}">Login</a></li>
-            <li><a href="{{ url_for('create_user') }}">Sign Up</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('register') }}">Sign Up</a></li>
         </ul>
     </div>
     <coingecko-coin-price-marquee-widget  coin-ids="bitcoin,ethereum,eos,ripple,litecoin" currency="usd" background-color="#ffffff" locale="en"></coingecko-coin-price-marquee-widget>
@@ -33,7 +31,6 @@
     <br>
     <h1>The Premium Crypto-Asset Tracker</h1>
     </div>
-    <!-- {% endblock %} -->
 </body>
 </html>
 

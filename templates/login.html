@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- {% block content %} -->
+{% from "_util.html" import render_field %}
+
 <head>
-    <title>Login</title>
+    <title>User Login</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/stylesheet.css') }}" />
     <link rel="airplane" href="{{ url_for('static', filename='/files/airplane.jpg') }}" />
@@ -34,19 +35,14 @@
     <!-- HEADER -->
     <div class="headerContainer">
         <a href="{{ url_for('index') }}">
-            <img src="/static/files/logo.png" height=80 alt="Logo"/>
+            <img src="/static/files/logo.png" height=80 alt="Logo" />
         </a>
-        <!-- NAVIGATION BAR -->
-        <ul>
-            <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('login_user') }}">Login</a></li>
-            <li><a href="{{ url_for('create_user') }}">Sign Up</a></li>
-        </ul>
+        
     </div>
 
     <div class="mainContainer">
-        <form method="POST" name="login" action="/login/" onsubmit="return processLogin()">
-            <div class="formContainer">
+        <div class="formContainer">
+            <form method="POST" name="login_request" action="/login_user_request" onsubmit="return processLogin()">
                 <fieldset>
                     <legend style="font-size:25px; color:cornflowerblue;">Login Information</legend>
                     <table>
@@ -69,9 +65,13 @@
                         <img src="/static/files/trashcan.png" height="40" alt="Reset Button" onclick="resetPage">
                     </button>
                 </p>
-        </form>
+                {% for message in get_flashed_messages() %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </form>
+        </div>
     </div>
-    <!-- {% endblock %} -->
 
 </body>
+
 </html>
