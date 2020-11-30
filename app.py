@@ -94,7 +94,7 @@ class Crypto(db.Model):
     current = db.Column(db.Numeric(10))
     target = db.Column(db.Numeric(10))
     tolerance = db.Column(db.Numeric(10))
-    username_id = db.Column(db.String, db.ForeignKey("user.username"), nullable=False)
+    username_id = db.Column(db.String, db.ForeignKey("user.id"), nullable=False)
 
 db.create_all()
 
@@ -108,9 +108,9 @@ def page_not_found(error):
 def index():
     return render_template("index.html")
 
-# @app.route('/login/')
-# def login():
-#     return render_template('login.html')
+@app.route('/login/')
+def login():
+    return render_template('login.html')
 
 # LOGIN PAGE
 @app.route("/login_user_request", methods=["GET", "POST"])
@@ -122,15 +122,15 @@ def login_request():
         password = str(User.query.filter_by(password=input_password).first())
         if input_username == username and input_password == password:
             # return render_template('home.html', username = username)
-            return redirect(url_for('homepage', username=username))
+            return redirect(url_for('home', username=username))
         else:
             flash('Incorrect Username or Password', 'error')
-    return render_template('login.html')
+    # return render_template('login.html')
 # https://github.com/mattupstate/flask-security/issues/198
 
-# @app.route('/registration/')
-# def register():
-#     return render_template("register.html")
+@app.route('/registration')
+def register():
+    return render_template("register.html")
 
 # SIGN UP CREATE USER
 @app.route("/registration_user_request", methods=["GET", "POST"])
@@ -141,17 +141,34 @@ def register_request():
         phone = str(request.form["pnumber"])
         password = str(request.form["password"])
 
-        new_user = User(username, email, phone, password)
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect(url_for('homepage', username=username))  
-    return render_template('register.html') 
+        # new_user = User(username, email, phone, password)
+        # db.session.add(new_user)
+        # db.session.commit()
+    return redirect(url_for('home', username=username))  
+    # return render_template('register.html') 
 
 # HOME
 @app.route("/home_page/<username>")
-def homepage(username):
+def home(username):
+    password = str(User.query.filter_by(password=input_password).first())
+
     rows = Crypto.query.all()
-    return render_template("home.html", title="Investments", rows=rows)
-    
+    return render_template("home.html", username = username, title="Investments", rows=rows)
+
+@app.route("/home_page_add", methods=["GET","POST"])
+def add_crypto():
+    if request.method == "POST":
+        symbol = str(request.form['symbol'])
+        purchase = int(request.form['purchase'])
+        current = int(crypto_current(symbol))
+        target = int(request.form['target'])
+        tolerance = int(request.form['tolerance'])
+        username_id = str(username)
+
+        new_crypto = Crypto(symbol, purchase, current, target, tolerance, username_id)
+        db.session.add(new_crypto)
+        db.session.commit()
+        flash("Good")
+        return redirect(url_for('homepage', username=username))
 
        

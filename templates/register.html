@@ -7,14 +7,14 @@
 <body>
     <!-- HEADER -->
     <div class="headerContainer">
-        <a href="{{ url_for('homepage') }}">
+        <a href="{{ url_for('index') }}">
             <img src="/static/files/logo.png" height=80 alt="Logo" />
         </a>
     </div>
 
     <div class="mainContainer">
         <div class="formContainer">
-            <form method="POST" name="register_request" action="/registration_user_request/" onsubmit="return processForm()">
+            <form method="POST" name="register_request" action="/registration_user_request" onsubmit="return processForm()">
                 <fieldset>
                     <legend style="font-size:25px; color:cornflowerblue;">User Information</legend>
                     <table>
