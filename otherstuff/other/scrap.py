@@ -78,3 +78,20 @@ ins = users.insert().values(
             phone=request.form["pnumber"],
             password=request.form["password"],
         )
+
+
+
+# HOME PAGE
+# @app.route("/home/<input_username>/<input_password>/<query_username>/<query_password>")
+# def home(input_username,input_password,query_username,query_password):
+#     return render_template("home.html", input_username=input_username, input_password=input_password, query_username=query_username, query_password=query_password)
+# LOGIN PAGE
+    #     Session = sessionmaker(bind=engine)
+    #     s = Session()
+    #     query = s.query(Users).filter(Users.username==input_username, Users.password==input_password)
+    #     result = query.first()
+    #     if result:
+    #         return redirect(url_for('home'))
+    #     else:
+    #         flash('wrong password')
+    # return render_template("login.html")

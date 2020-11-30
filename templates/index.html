@@ -1,6 +1,8 @@
 <!-- Project Homepage -->
 <!DOCTYPE html>
 <html lang="en">
+<!-- {% extends "layout.jinja2" %}
+{% block content %} -->
 
 <head>
     <title>Crypto Homepage</title>
@@ -22,7 +24,6 @@
         </a>
         <!-- NAVIGATION BAR -->
         <ul>
-            <li><a href="{{ url_for('home') }}">Home</a></li>
             <li><a href="{{ url_for('login_user') }}">Login</a></li>
             <li><a href="{{ url_for('create_user') }}">Sign Up</a></li>
         </ul>
@@ -32,11 +33,7 @@
     <br>
     <h1>The Premium Crypto-Asset Tracker</h1>
     </div>
-    <div class="table">
-        {% block body %}
-        {{ data|safe }}
-        {% endblock %}  
-    </div>
+    <!-- {% endblock %} -->
 </body>
 </html>
 
