@@ -33,18 +33,20 @@ roles_users = db.Table(
     db.Column("role_id", db.Integer(), db.ForeignKey("role.id")),
 )
 
+
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))
 
+
 from flask_mail import Mail
 
-app.config['MAIL_SERVER'] = 'smtp.example.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'username'
-app.config['MAIL_PASSWORD'] = 'password'
+app.config["MAIL_SERVER"] = "smtp.example.com"
+app.config["MAIL_PORT"] = 465
+app.config["MAIL_USE_SSL"] = True
+app.config["MAIL_USERNAME"] = "username"
+app.config["MAIL_PASSWORD"] = "password"
 mail = Mail(app)
 
 # USER CLASS SETUP
