@@ -17,7 +17,6 @@ app.config["SECRET_KEY"] = "asldkf0cm0iasfew"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 
 
-
 db = SQLAlchemy(app)
 
 from flask_security import (
