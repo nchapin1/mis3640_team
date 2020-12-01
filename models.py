@@ -14,9 +14,10 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 app.config["SECRET_KEY"] = "asldkf0cm0iasfew"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+
 class User(db.Model):
-    """User database model.  
-    """
+    """User database model."""
+
     def __init__(self, username, email, phone, password):
         self.username = username
         self.email = email
@@ -33,8 +34,8 @@ class User(db.Model):
 
 
 class Crypto(db.Model):
-    """Crypto database model.  
-    """
+    """Crypto database model."""
+
     def __init__(self, symbol, purchase, current, target, tolerance, username_id):
         self.symbol = symbol
         self.purchase = purchase
