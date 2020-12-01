@@ -8,15 +8,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/stylesheet.css') }}" />
     <link rel="airplane" href="{{ url_for('static', filename='/files/airplane.jpg') }}" />
     <link rel="trashcan" href="{{ url_for('static', filename='/files/trashcan.png') }}" />
-
     <style>
     </style>
     <script>
+        $(function () {
+            $("#resetIcon").click(function () {
+                $("input[type='text']").css("background-color", "white");
+            });
+        });
+        function passwordlength(password) {
+            if (password.value.length < 6) {
+                alert("Entry must be at least 6 characters")
+            }
+        }
         function processLogin() {
             if (document.getElementById("uname").value == "") {
                 alert("Username is required");
                 document.getElementById("uname").focus();
                 document.getElementById("uname").style.backgroundColor = "#FFFF00";
+            }
+            else if (isNaN(document.getElementById("pnumber").value)) {
+                alert("Please Omit Dashes and Parentheses");
+                document.getElementById("pnumber").value = "";
+                document.getElementById("pnumber").focus();
             }
             else if (document.getElementById("email").value == "") {
                 alert("Email is required");
@@ -28,18 +42,16 @@
             }
             return false;
         };
+
     </script>
 </head>
-
 <body>
     <!-- HEADER -->
     <div class="headerContainer">
         <a href="{{ url_for('index') }}">
             <img src="/static/files/logo.png" height=80 alt="Logo" />
         </a>
-        
     </div>
-
     <div class="mainContainer">
         <div class="formContainer">
             <form method="POST" name="login_request" action="/login_user_request" onsubmit="return processLogin()">
@@ -52,7 +64,8 @@
                         </tr>
                         <tr>
                             <td>Password:</td>
-                            <td><input type="text" size="30" name="password" id="password" /></td>
+                            <td><input type="text" size="30" name="password" id="password" minlength="6"
+                                    onblur='passwordlength(this)' /></td>
                         </tr>
                     </table>
                 </fieldset>

@@ -62,6 +62,7 @@
         background-color="#ffffff" locale="en"></coingecko-coin-price-marquee-widget>
     <p>Plot for portfolio</p>
     <p>existing username: {{username}}</p>
+    <p>rows: {{rows}}</p>
     <div class="center">
         <p>Investments</p>
         <table>
@@ -79,11 +80,17 @@
                 <td>{{row.current}}</td>
                 <td>{{row.target}}</td>
                 <td>{{row.tolerance}}</td>
+                <form method="POST" name='removeCrypto' action="{{url_for('remove_crypto', username=username)}}">
+                    <input style="display:none;" type="hidden" name="symbol" value="{{row.symbol}}"></input>
+                    <td><button type="submit" value = "submit" name="submit">Remove</button></td>
+                    {% for message in get_flashed_messages() %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                </form>
             </tr>
             {% endfor %}
-            <form method="POST" name='addCrypto' role="form" action="{{url_for('add_crypto', username=variable)}}"
+            <form method="POST" name='addCrypto' action="{{url_for('add_crypto', username=username)}}"
                 onsubmit="return addCrypto()">
-
                 <tr>
                     <td><input type="text" name="symbol" id="symbol" /></td>
                     <td><input type="number" name="purchase" id="purchase" /></td>
